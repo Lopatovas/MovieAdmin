@@ -1,5 +1,5 @@
 # MovieAdmin
-#2 Setup
+## 1. Setup
 To get the app initiate a pull request or download the .zip version.
 Once you have the app on your machine, follow these steps:
 1. Open the project in Visual studio.
