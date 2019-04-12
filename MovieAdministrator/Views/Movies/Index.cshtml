@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MovieAdministrator.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<h2>Movies</h2>
+
+<p>
+    <a asp-action="Create" class="btn bg-primary">Add movie</a>
+</p>
+<button onclick="displaySearch()" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+<br />
+<hr />
+<div id="filter" class="col-sm-4">
+	<form asp-action="Index" method="get">
+		<div class="form-actions no-color">
+			<p>
+				<label for="genreFilter">Find by name </label>
+				<input type="text" name="titleFilter" value="@ViewData["TitleFilter"]" class="form-control" placeholder="Enter name..."/>
+			</p>
+		</div>
+		<div class="form-actions no-color">
+			<p>
+				<label for="genreFilter">Find by genre </label>
+				<input type="text" name="genreFilter" value="@ViewData["GenreFilter"]" class="form-control" placeholder="Enter genre..."/>
+			</p>
+		</div>
+		<div class="form-actions no-color">
+			<p>
+				<label for="genreFilter">Find by date </label>
+				<input type="date" name="dateFilter" value="@ViewData["DateFilter"]" class="form-control" />
+			</p>
+			<input type="submit" value="Search" class="btn btn-primary" />
+			<a asp-action="Index" class="btn btn-primary">Back to Full List</a>
+		</div>
+	</form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre.Name)
+            </td>
+			<td>
+				<a asp-action="Edit" class="btn-sm btn-primary" asp-route-id="@item.ID"><span class="glyphicon glyphicon-edit" /></a>
+				<a asp-action="Details" class="btn-sm btn-info" asp-route-id="@item.ID"><span class="glyphicon glyphicon-open" /></a>
+				<a asp-action="Delete" class="btn-sm btn-danger" asp-route-id="@item.ID"><span class="glyphicon glyphicon-trash" /></a>
+				<a asp-controller="Casts" asp-action="Index" asp-route-id="@item.ID" class="btn-sm btn-primary">Casting overview</a>
+			</td>
+        </tr>
+}
+    </tbody>
+</table>

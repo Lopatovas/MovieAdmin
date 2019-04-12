@@ -1,0 +1,32 @@
+﻿@model MovieAdministrator.Models.Cast
+
+@{
+    ViewData["Title"] = "Cast removal";
+}
+
+<h2>Casting removal</h2>
+
+<h5>Please make sure you are deleting the right item.</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Actor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Actor.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Movie)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Movie.Title)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete"  class="btn btn-primary" />
+        <a asp-controller="Casts" asp-action="Index" asp-route-id="@Model.MovieID" class="btn btn-primary">Return</a>
+    </form>
+</div>

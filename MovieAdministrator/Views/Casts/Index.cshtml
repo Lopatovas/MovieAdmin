@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MovieAdministrator.Models.Cast>
+
+@{
+    ViewData["Title"] = "Casting overview";
+}
+
+<h2>@ViewBag.Movie.Title</h2>
+
+<p>
+    <a asp-action="Create" asp-route-id="@ViewBag.Movie.ID" class="btn bg-primary">Add cast member</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Actor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.Actor.FullName)
+			</td>
+            <td>
+				<a asp-action="Delete" class="btn-sm btn-danger" asp-route-id="@item.ID"><span class="glyphicon glyphicon-trash" /></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<a  asp-controller="Movies" asp-action="Index" class="btn btn-primary">Return To Movies</a>
